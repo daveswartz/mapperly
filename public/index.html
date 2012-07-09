@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Mapperly</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="assets/stylesheets/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+    <link href="assets/stylesheets/bootstrap-responsive.css" rel="stylesheet">
+    <link href="assets/stylesheets/mapperly.css" rel="stylesheet"/>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#">Mapperly</a>
+        </div>
+      </div>
+    </div>
+
+	<div class="container">
+  	  <div class="row">
+        <div class="span3">
+		  <h1>Mapperly</h1>
+		  <p>Mapperly will make the New York City subway system easy to understand. Instead of cramming symbols and legends into a tiny space, we make the map
+        dynamic.</p>
+		  <p>Mapperly is under development, but you can still play with an early preview below.</p>
+		</div>
+		<div class="span3">
+		  <h2>Navigate</h2>
+		  <dl>
+			<dt>Zoom In</dt><dd>Scroll up or double-click</dd>
+			<dt>Zoom Out</dt><dd>Scroll down or shift double-click</dd>
+			<dt>Pan</dt><dd>Click and drag</dd>			
+		  </dl>
+		</div>
+		<div class="span3">
+		  <h3>Want to know when it is ready?</h3>
+		  <form class="well">
+		    <input type="text" class="input-large" placeholder="Email">
+		    <button type="submit" class="btn">Submit</button>
+		  </form>
+		</div>
+		<div class="span3">
+		  <h3>We love feedback!</h3>
+		  <form class="well">
+		    <input type="text" class="input-large" placeholder="Let us know what you think.">
+		    <button type="submit" class="btn">Submit</button>
+		  </form>
+		</div>
+	  </div>	  
+      <div class="hero-unit">
+	    <div id="vis"></div>
+	  </div>
+    </div> <!-- /container -->
+
+	<script src="assets/javascripts/d3.v2.js"></script>
+    <script src="assets/javascripts/underscore.js"></script>
+	<script src="assets/javascripts/mapperly.js"></script>
+	
+  </body>
+</html>

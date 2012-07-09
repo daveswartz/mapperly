@@ -1,0 +1,16 @@
+logs
+project/project
+project/target
+target
+tmp
+.history
+dist
+RUNNING_PID
+*~
+*.bak
+*.old
+*.tmp
+nohup.out
+tmp/
+._*
+.DS_Store
