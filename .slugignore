@@ -1,1 +1,5 @@
-public/javascripts/mapperly.js
+public/javascripts/*.js
+public/stylesheets/*.css
+public/index.html
+public/images/favicon.ico
+.env
