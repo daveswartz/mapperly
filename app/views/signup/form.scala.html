@@ -1,0 +1,34 @@
+@(signupForm: Form[User])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@main(title = Html("Sign Up"), nav = "signup") {
+    
+    @helper.form(action = routes.SignUp.submit) {
+        
+        <fieldset>
+            <legend>Want to know when we're ready?</legend>
+
+            @inputText(
+                signupForm("email"), 
+                '_label -> "Email",
+                '_help -> "Enter a valid email address."
+            )
+            
+            @textarea(
+                signupForm("feedback"), 
+                '_label -> "We love feedback! Let us know what you think.", 
+                'cols -> 50
+            )
+            
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" class="btn btn-primary" value="Submit">
+            <a href="@routes.Application.index" class="btn">Cancel</a>
+        </div>
+        
+    }
+    
+}

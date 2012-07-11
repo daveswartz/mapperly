@@ -17811,9 +17811,9 @@ var transfersJson = {
 var initialScale = 400000;
 
 //var width = innerWidth - 135 - 135 - 60 - 60;
-var width = 1050;
+var width = 1130;
 //var height = innerHeight;
-var height = 500;
+var height = 550;
 
 var projection = d3.geo.albers().origin([originJson.lon, originJson.lat]).scale(initialScale).translate([width/4, height*5/8]);
 

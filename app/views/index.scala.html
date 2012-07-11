@@ -1,0 +1,27 @@
+@import helper._
+@import helper.twitterBootstrap._
+
+@main(Html("Mapperly"), nav = "map") {
+
+  <div class="row">
+  
+    <div class="span4">
+      <h1>Mapperly <small>Preview</small></h1>
+      <p class="lead">A simple + interactive map of the <nobr>New York City subway system</nobr></p>
+    </div>
+    
+    <div class="span1 offset7" >
+      <a href="#" id="help" class="btn btn-info" rel="popover" title="How to interact" data-content="<dl><dt>Zoom In</dt><dd>Scroll up or double-click</dd><dt>Zoom Out</dt><dd>Scroll down or shift double-click</dd><dt>Pan</dt><dd>Click and drag</dd></dl>">Help</a>
+    </div>
+    
+  </div>
+  
+  <div class="well">
+    <div id="vis"></div>
+  </div>
+  
+  <script>  
+    $(function () { $("#help").popover({placement:"bottom", html : true}); });  
+    </script> 
+    
+}
