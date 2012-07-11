@@ -4,9 +4,8 @@ import play.api._
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
-
+import play.api.Logger
 import views._
-
 import models._
 
 object SignUp extends Controller {
@@ -26,7 +25,8 @@ object SignUp extends Controller {
     signupForm.bindFromRequest.fold(
       errors => BadRequest(html.signup.form(errors)),
       user => {
-		println(user)
+		Users.create(user)	
+		Logger("Mapperly").info(user.toString)
 		Ok(html.signup.summary())
 	  }
     )
