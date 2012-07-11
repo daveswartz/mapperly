@@ -26,7 +26,7 @@ object SignUp extends Controller {
       errors => BadRequest(html.signup.form(errors)),
       user => {
 		Users.create(user)	
-		Logger("Mapperly").info(user.toString)
+		Logger.info(user.toString)
 		Ok(html.signup.summary())
 	  }
     )
