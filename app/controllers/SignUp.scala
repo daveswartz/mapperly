@@ -12,8 +12,8 @@ object SignUp extends Controller {
 
   val signupForm = Form(
     mapping(
-      "email" -> email,
-      "feedback" -> optional(text)
+      "email" -> optional(text),
+      "feedback" -> nonEmptyText
     )(User.apply)(User.unapply)
   )
      

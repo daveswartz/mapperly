@@ -7,8 +7,8 @@ import com.mongodb.casbah.Imports._
 import com.mongodb.casbah.{MongoURI, MongoConnection}
 
 case class User(
-  email: String, 
-  feedback: Option[String]
+  email: Option[String],
+  feedback: String
 )
 
 object Users {

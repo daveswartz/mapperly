@@ -3,23 +3,23 @@
 @import helper._
 @import helper.twitterBootstrap._
 
-@main(title = Html("Sign Up"), nav = "signup") {
+@main(title = Html("Feedback"), nav = "feedback") {
     
     @helper.form(action = routes.SignUp.submit) {
         
         <fieldset>
-            <legend>Want to know when we're ready?</legend>
+            <legend>We love feedback! Let us know what you think.</legend>
+           
+            @textarea(
+                signupForm("feedback"), 
+                '_label -> "Feedback", 
+                'cols -> 50
+            )
 
             @inputText(
                 signupForm("email"), 
                 '_label -> "Email",
-                '_help -> "Enter a valid email address."
-            )
-            
-            @textarea(
-                signupForm("feedback"), 
-                '_label -> "We love feedback! Let us know what you think.", 
-                'cols -> 50
+                '_help -> "Optional"
             )
             
         </fieldset>
