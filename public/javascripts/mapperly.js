@@ -60,7 +60,7 @@ var priorities = {
 	}},
 	majortransferuniq: function() { return {
 		stopCutoff: 300000,
-		labelCutoff: 1000000
+		labelCutoff: 600000
 	}},
 	closed: function() { return {
 		stopCutoff: Infinity,
@@ -68,7 +68,7 @@ var priorities = {
 	}},
 	defacto: function() { return {
 		stopCutoff: 600000,
-		labelCutoff: 1000000
+		labelCutoff: 600000
 	}}
 };
 

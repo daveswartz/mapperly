@@ -10,8 +10,8 @@
       <p class="lead">A simple + interactive map of the <nobr>New York City subway</nobr></p>
     </div>
     
-    <div class="span1 offset7" >
-      <a href="#" id="help" class="btn btn-info" rel="popover" title="How to interact" data-content="<dl><dt>Zoom In</dt><dd>Scroll up or double-click</dd><dt>Zoom Out</dt><dd>Scroll down or shift double-click</dd><dt>Pan</dt><dd>Click and drag</dd></dl>">Help</a>
+    <div class="span2 offset6" >
+      <a href="#" id="help" class="btn btn-large btn-info" rel="popover" title="How to interact" data-content="<dl><dt>Zoom In</dt><dd>Scroll up or double-click</dd><dt>Zoom Out</dt><dd>Scroll down or shift double-click</dd><dt>Pan</dt><dd>Click and drag</dd></dl>">Help</a>
     </div>
     
   </div>
@@ -21,7 +21,16 @@
   </div>
   
   <script>  
-    $(function () { $("#help").popover({placement:"bottom", html : true}); });  
-    </script> 
+    $(function () {
+      $("#help").popover({
+        placement:"bottom",
+        html : true,
+        trigger: 'manual'
+      }).click(function(e) {
+        $(this).popover('toggle');
+        e.preventDefault();
+      });
+    });  
+  </script> 
     
 }
