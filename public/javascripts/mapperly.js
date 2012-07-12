@@ -11938,8 +11938,6 @@ var stopsJson = {
           type : "Point"
         },
         name : "Forest Hills - 71 Av",
-          dx : 5,
-          dy: -5,
         priority : priorities.major,
         type : "Feature"
       },
@@ -17817,7 +17815,13 @@ var height = 550;
 
 var projection = d3.geo.albers().origin([originJson.lon, originJson.lat]).scale(initialScale).translate([width/4, height*5/8]);
 
-var showTransfer = function(d) {
+function isOnScreen(position) {
+	return position[0] > -20 && position[0] < width + 20 && position[1] > -20 && position[1] < height + 20;
+}
+
+// TODO only show line if in viewport
+
+var showTransfer = function(d) { // TODO only show transfer if in viewport
 	var cutoff = _.has(d, "priority") ? d.priority : transferPriorities.defacto;
    	return cutoff < projection.scale();
 };
@@ -17825,18 +17829,13 @@ var showTransfer = function(d) {
 var showStop = function(d) {
 	var cutoff = (_.has(d, "priority") ? d.priority : priorities.defacto)().stopCutoff;
 	var p = projection(d.geometry.coordinates);
-   	return p[0] > 0 && p[0] < width && p[1] > 0 && p[1] < height && cutoff < projection.scale();
+   	return isOnScreen(p) && cutoff < projection.scale();
 };
 
 var showLabel = function(d) {
 	var cutoff = (_.has(d, "priority") ? d.priority : priorities.defacto)().labelCutoff;
 	var p = projection(d.geometry.coordinates);
-	if (cutoff > projection.scale()) return false;
-   	if (p[0] > 0 && p[0] < width && p[1] > 0 && p[1] < height) {
-		return true;
-	} else {
-		return false;
-	}
+   	return isOnScreen(p) && cutoff < projection.scale();
 };
 
 var s = projection.scale();
@@ -17866,12 +17865,13 @@ var nodes = force.nodes();
 var links = force.links();
 
 force.on("tick", function() {
-	links.forEach(function(d) {
+	links.forEach(function(d) { // TODO should only need to do this on panzoom (not each tick)
 		var sourceScreen = projection(d.source.coords);
 		d.source.x = sourceScreen[0];
 		d.source.y = sourceScreen[1];
+		d.target.offset = [d.target.x - d.source.x, d.target.y - d.source.y];
 	});
-	
+
 	map.selectAll("g.node")
 		.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 	
@@ -17907,6 +17907,12 @@ function restart() { // TODO if I can pass in nodes and links can change updateN
 		.attr("id", "label");
 	
 	node.exit().remove();
+
+	nodes.filter(function(n) { return !n.fixed }).forEach(function(d) {
+		var sourceScreen = projection(d.coords);
+		d.x = sourceScreen[0] + d.offset[0];
+		d.y = sourceScreen[1] + d.offset[1];
+	});
 	
 	force.start();
 }
@@ -17965,6 +17971,7 @@ function updateNodes() {
 			var yJitter = Math.sqrt(100 - xJitter*xJitter);
 			n.x = screen[0] + xJitter;
 			n.y = screen[1] + yJitter;
+			n.offset = [xJitter, yJitter];
 
 			// Adds node for floating label
 			nodes.push(n); 

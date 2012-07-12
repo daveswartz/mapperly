@@ -5,7 +5,7 @@
 }
 #coast {
 	stroke-width: 0px;
-	fill: #cccccc;
+	fill: #ddd;
 }
 #line {
 	stroke-width: 4;
@@ -20,9 +20,9 @@
 }
 #stop {
 	fill-opacity: 0.95;
- 	fill: #fff;
+ 	fill: #f5f5f5;
 	stroke-opacity: 0.95;
-	stroke: #444;
+	stroke: #999;
 }
 #backer {		  
     stroke: #fff;
