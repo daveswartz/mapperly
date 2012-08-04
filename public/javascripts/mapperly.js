@@ -1,75 +1,75 @@
 var groups = {
-    onetwothree : function() { return {
+    onetwothree : {
 		color : "#EF3E42",
 		index : 0
-    }},
-    fourfivesix : function() { return {
+    },
+    fourfivesix : {
 		color : "#00A65C",
 		index : 3
-    }},
-    seven : function() { return {
+    },
+    seven : {
 		color : "#9D3D97",
 		index : 0
-    }},
-    ace : function() { return {
+    },
+    ace : {
 		color : "#0039A6",
 		index : 2
-    }},
-    bdfm : function() { return {
+    },
+    bdfm : {
 		color : "#F58220",
 		index : 0
-    }},
-    g : function() { return {
+    },
+    g : {
 		color : "#7DC242",
 		index : 3
-    }},
-    jz : function() { return {
+    },
+    jz : {
 		color : "#B0720D",
 		index : 4
-    }},
-    l : function() { return {
+    },
+    l : {
 		color : "#939598",
 		index : 0
-    }},
-    nqr : function() { return {
+    },
+    nqr : {
 		color : "#FFD520",
 		index : 4
-    }},
-    s : function() { return {
+    },
+    s : {
 		color : "#6C6D70",
 		index : 3
-    }},
-    sir : function() { return {
+    },
+    sir : {
 		color : "#1D70B3",
 		index : 0
-    }}
+    }
 };
 
 var priorities = {
-	major: function() { return {
+	major: {
 		stopCutoff: 300000,
 		labelCutoff: 300000
-	}},
-	majortransfer: function() { return {
+	},
+	majortransfer: {
 		stopCutoff: 300000,
 		labelCutoff: Infinity
-	}},
-	transfer: function() { return {
+	},
+	transfer: {
 		stopCutoff: 600000,
 		labelCutoff: Infinity
-	}},
-	majortransferuniq: function() { return {
+	},
+	majortransferuniq: {
 		stopCutoff: 300000,
 		labelCutoff: 600000
-	}},
-	closed: function() { return {
+	},
+	closed: {
 		stopCutoff: Infinity,
 		labelCutoff: Infinity
-	}},
-	defacto: function() { return {
+	},
+	defacto: {
 		stopCutoff: 600000,
 		labelCutoff: 600000
-	}}
+	}
 };
 
 var transferPriorities = {
@@ -17808,42 +17808,41 @@ var transfersJson = {
 
 var initialScale = 400000;
 
-//var width = innerWidth - 135 - 135 - 60 - 60;
+var minScaleFactor = 0.5;
+var maxScaleFactor = 8;
+
 var width = 1130;
-//var height = innerHeight;
 var height = 550;
 
 var projection = d3.geo.albers().origin([originJson.lon, originJson.lat]).scale(initialScale).translate([width/4, height*5/8]);
 
-function isOnScreen(position) {
-	return position[0] > -20 && position[0] < width + 20 && position[1] > -20 && position[1] < height + 20;
+// Functions that control when to render points and lines
+function isPointVisible(coordinates) {
+	var p = projection(coordinates);
+	return p[0] > -20 && p[0] < width + 20 && p[1] > -20 && p[1] < height + 20;
 }
-
-// TODO only show line if in viewport
-
-var showTransfer = function(d) { // TODO only show transfer if in viewport
+function isLineVisible(d) {
+	return d.geometry.coordinates.some(isPointVisible);
+}
+function showTransfer(d) {
 	var cutoff = _.has(d, "priority") ? d.priority : transferPriorities.defacto;
-   	return cutoff < projection.scale();
-};
-
-var showStop = function(d) {
-	var cutoff = (_.has(d, "priority") ? d.priority : priorities.defacto)().stopCutoff;
-	var p = projection(d.geometry.coordinates);
-   	return isOnScreen(p) && cutoff < projection.scale();
-};
-
-var showLabel = function(d) {
-	var cutoff = (_.has(d, "priority") ? d.priority : priorities.defacto)().labelCutoff;
-	var p = projection(d.geometry.coordinates);
-   	return isOnScreen(p) && cutoff < projection.scale();
-};
+   	return isLineVisible(d) && cutoff < projection.scale();
+}
+function showStop(d) {
+	var cutoff = (_.has(d, "priority") ? d.priority : priorities.defacto).stopCutoff;
+	return isPointVisible(d.geometry.coordinates) && cutoff < projection.scale(); 
+}
+function showLabel(d) {
+	var cutoff = (_.has(d, "priority") ? d.priority : priorities.defacto).labelCutoff;
+	return isPointVisible(d.geometry.coordinates) && cutoff < projection.scale(); 
+}
 
 var s = projection.scale();
 var path = d3.geo.path().projection(projection);
 path.pointRadius(6);
 var zoom = d3.behavior.zoom()
 	.translate(projection.translate())
-	.scaleExtent([0.5, 8]) // TODO Take into account screen size to set extents
+	.scaleExtent([minScaleFactor, maxScaleFactor])
 	.on("zoom", panzoom);
 var map = d3.select("#vis").append("svg:svg")
 	.call(zoom);
@@ -17865,7 +17864,7 @@ var nodes = force.nodes();
 var links = force.links();
 
 force.on("tick", function() {
-	links.forEach(function(d) { // TODO should only need to do this on panzoom (not each tick)
+	links.forEach(function(d) { // TODO <<<< HERE, should only need to do this on panzoom (not each tick)
 		var sourceScreen = projection(d.source.coords);
 		d.source.x = sourceScreen[0];
 		d.source.y = sourceScreen[1];
@@ -17998,7 +17997,7 @@ lines.selectAll("line")
 	.data(pathsJson.features)
 	.enter().append("svg:path")
 	.attr("stroke", function(d, i) { 
-		return d3.rgb(d.routes[0]().color) 
+		return d3.rgb(d.routes[0].color) 
 	})
 	.attr("d", path)
     .each(createTransition());
@@ -18017,9 +18016,11 @@ function panzoom() {
 	// Updates the projection ignoring translation bounds
 	projection.translate(d3.event.translate);
 	projection.scale(s * d3.event.scale);
+	panzoomed(d3.event.scale, d3.event.translate);
+}
 
+function panzoomed(scale, t) {
 	// Computes the translation bounds
-	var t = d3.event.translate;
 	var upperLeft = projection([upperLeftJson.lon, upperLeftJson.lat]);
 	var lowerRight = projection([lowerRightJson.lon, lowerRightJson.lat]);
 	if (upperLeft[0] > 0) {
@@ -18035,10 +18036,12 @@ function panzoom() {
 		t[1] -= (lowerRight[1] - height);
 	}
 
-	// Updates the projection accounting for translation bounds
+	// Updates the projection and zoom accounting for translation bounds
 	projection.translate(t);
-	projection.scale(s * d3.event.scale);
-	
+	projection.scale(s * scale);
+
+	zoom.translate(t).scale(scale);
+
 	var transfersSelect = transfers.selectAll("path")
 		.data(transfersJson.features.filter(showTransfer));
 	// Adds transfers which are now visible
@@ -18067,7 +18070,7 @@ function panzoom() {
 
 function createTransition() {
 	return function(d, i) {
-		var gs = _.sortBy(_.uniq(d.routes.map(function(r) { return JSON.stringify(r()) })).map(function(s) { return JSON.parse(s) }), function(g) { return g.index; });
+		var gs = _.sortBy(_.uniq(d.routes, function(r) { return r.color }), function(r) { return r.index; });
 		if (gs.length > 1) {
 			d3.select(this).transition()
 				.delay()
@@ -18089,3 +18092,26 @@ function transition(gs, i) {
 			.each("end", transition(gs, i == gs.length - 1 ? 0 : i + 1));
 	};
 }
+
+// UI button functions
+function doZoom(multiple) {
+	var zoomFactor = Math.min(maxScaleFactor, zoom.scale() * multiple);
+	var pan = [width/2 + zoomFactor/zoom.scale()*(zoom.translate()[0] - width/2), height/2 + zoomFactor/zoom.scale()*(zoom.translate()[1] - height/2)];
+	projection.scale(s * zoomFactor);
+	projection.translate(pan);
+	panzoomed(zoomFactor, pan);
+}
+
+function zoomIn() { doZoom(2); }
+function zoomOut() { doZoom(0.5); }
+
+function doPan(p) {
+	var pan = [zoom.translate()[0] + p[0], zoom.translate()[1] + p[1]];
+	projection.translate(pan);
+	panzoomed(zoom.scale(), pan);
+}
+
+function panLeft() { doPan([width/4, 0]); }
+function panRight() { doPan([-width/4, 0]); }
+function panUp() { doPan([0, height/4]); }
+function panDown() { doPan([0, -height/4]); }
