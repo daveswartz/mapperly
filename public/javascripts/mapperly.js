@@ -18093,7 +18093,8 @@ function transition(gs, i) {
 	};
 }
 
-// UI button functions
+/* UI button functions */
+
 function doZoom(multiple) {
 	var zoomFactor = Math.min(maxScaleFactor, zoom.scale() * multiple);
 	var pan = [width/2 + zoomFactor/zoom.scale()*(zoom.translate()[0] - width/2), height/2 + zoomFactor/zoom.scale()*(zoom.translate()[1] - height/2)];
