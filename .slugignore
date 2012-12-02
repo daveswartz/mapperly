@@ -2,3 +2,4 @@ public/javascripts/*.js
 public/stylesheets/*.css
 public/images/favicon.ico
 .env
+mapperly.png
