@@ -14,7 +14,8 @@ object ApplicationBuild extends Build {
 
 	val main = PlayProject(appName, appVersion, appDependencies, mainLang = SCALA).settings(
 	  resolvers ++= Seq(
-		"repo.novus snaps" at "http://repo.novus.com/snapshots/"
+		"repo.novus snaps" at "http://repo.novus.com/snapshots/",
+		"Scala-Tools Mirror" at "https://oss.sonatype.org/content/groups/scala-tools"
 	  )
 	)
 
