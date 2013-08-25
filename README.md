@@ -10,7 +10,7 @@ Built using d3.js and served with the Play framework. The project is hosted on H
 
 * Install Play 2.1.3 following the instructions in the [Play framework documentation](http://www.playframework.com/documentation/2.1.3/Installing);
 * In the project root run: `play run`;
-* Navigate to [localhost:9000](localhost:9000) in your web browser.
+* Navigate to [http://localhost:9000](http://localhost:9000) in your web browser.
 
 ## Copyright and license
 
