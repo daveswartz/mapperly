@@ -1,6 +1,6 @@
 import sbt._
 import Keys._
-import PlayProject._
+import play.Project._
 
 object ApplicationBuild extends Build {
 
@@ -8,15 +8,9 @@ object ApplicationBuild extends Build {
     val appVersion = "0.1-SNAPSHOT"
 
 	val appDependencies = Seq(
-	  "com.mongodb.casbah" %% "casbah" % "2.1.5-1",
-	  "com.novus" %% "salat-core" % "0.0.8-SNAPSHOT"
+	  "com.novus" %% "salat" % "1.9.2"
 	)
 
-	val main = PlayProject(appName, appVersion, appDependencies, mainLang = SCALA).settings(
-	  resolvers ++= Seq(
-		"repo.novus snaps" at "http://repo.novus.com/snapshots/",
-		"Scala-Tools Mirror" at "https://oss.sonatype.org/content/groups/scala-tools"
-	  )
-	)
+	val main = play.Project(appName, appVersion, appDependencies).settings()
 
 }
