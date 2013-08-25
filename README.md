@@ -12,6 +12,12 @@ Built using d3.js and served with the Play framework. The project is hosted on H
 * In the project root run: `play run`;
 * Navigate to [http://localhost:9000](http://localhost:9000) in your web browser.
 
+## Data
+
+* `assets/data/coast.json` -- GeoJson file that stores the outline of the coast in the Greater New York City area.
+* `assets/data/stops.json` -- GeoJson file that stores the location and name of each subway stop.
+* `assets/data/transfers.json` -- GeoJson file that stores the location and name of each subway transfer.
+
 ## Copyright and license
 
 Copyright 2012 David Swartz
