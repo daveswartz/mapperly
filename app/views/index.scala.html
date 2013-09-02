@@ -1,43 +1,10 @@
 @import helper._
 @import helper.twitterBootstrap._
 
-@main(Html("Mapperly | A Simple + Interactive Map of the New York City Subway"), nav = "map") {
-
-  <div class="row">  
-    <div class="span4">
-      <h1>Mapperly <small>Preview</small></h1>
-      <p class="lead">A simple + interactive map of the <nobr>New York City subway</nobr></p>
-    </div>    
-
-    <div class="span3 offset5">
-	  <div class="btn-toolbar" style="float: right; padding-top:69px">
-		<div class="btn-group">
-  	      <button id="panleft" class="btn btn-mini" onclick="JavaScript:panLeft()" rel="tooltip" title="Left"><i class="icon-chevron-left"></i></button>
-  	      <button id="panup" class="btn btn-mini" onclick="JavaScript:panUp()" rel="tooltip" title="Up"><i class="icon-chevron-up"></i></button>
-  	      <button id="pandown" class="btn btn-mini" onclick="JavaScript:panDown()" rel="tooltip" title="Down"><i class="icon-chevron-down"></i></button>
-  	      <button id="panright" class="btn btn-mini" onclick="JavaScript:panRight()" rel="tooltip" title="Right"><i class="icon-chevron-right"></i></button>
-		</div>
-	    <div class="btn-group">
-  	      <button id="zoomin" class="btn btn-mini" onclick="JavaScript:zoomIn()" rel="tooltip" title="Zoom In"><i class="icon-plus"></i></button>
-  	      <button id="zoomout" class="btn btn-mini btn-inverse" onclick="JavaScript:zoomOut()" rel="tooltip" title="Zoom Out"><i class="icon-minus icon-white"></i></button>
-        </div>
-      </div>
-	</div>
-  </div>
+@main(Html("Mapperly | A Simple + Interactive Map of the New York City Subway")) {
   
   <div class="well">
     <div id="vis"></div>
   </div>
-  
-  <script>
-    $(document).ready(function() {
-      $("#zoomin").tooltip()
-      $("#zoomout").tooltip()
-      $("#panleft").tooltip()
-      $("#panup").tooltip()
-      $("#pandown").tooltip()
-      $("#panright").tooltip()
-    });
-  </script>
     
 }

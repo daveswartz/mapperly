@@ -1,11 +1,7 @@
 #vis{
 	height: 550px;
 	width: 1130px;
-    background-color: #0088cc;
-}
-#coast {
-	stroke-width: 0px;
-	fill: #ddd;
+    background-color: #cccccc;
 }
 #line {
 	stroke-width: 4;
