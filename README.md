@@ -14,7 +14,6 @@ Built using d3.js and served with the Play framework. The project is hosted on H
 
 ## Data
 
-* `assets/data/coast.json` -- GeoJson file that stores the outline of the coast in the Greater New York City area.
 * `assets/data/paths.json` -- GeoJson file that stores the path of each subway line.
 * `assets/data/stops.json` -- GeoJson file that stores the location and name of each subway stop.
 * `assets/data/transfers.json` -- GeoJson file that stores the location and name of each subway transfer.
