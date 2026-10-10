@@ -2,7 +2,7 @@
 
 Mapperly is a simple + interactive map of the New York City subway. 
 
-Built using d3.js as a static page.
+Built using d3.js as a static page. The project is hosted on [GitHub Pages](https://daveswartz.github.io/mapperly/).
 
 ![Mapperly](https://raw.github.com/daveswartz/mapperly/master/mapperly.png)
 
@@ -12,6 +12,8 @@ Built using d3.js as a static page.
 * Navigate to [http://localhost:8000](http://localhost:8000) in your web browser.
 
 ## Data
+
+The station and line data has not been updated since 2013. It does not include 34 St - Hudson Yards (2015), the W (restored 2016) or the Second Avenue Subway (2017).
 
 * `assets/data/paths.json` -- GeoJson file that stores the path of each subway line.
 * `assets/data/stops.json` -- GeoJson file that stores the location and name of each subway stop.
