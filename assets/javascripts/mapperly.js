@@ -87,7 +87,7 @@ d3.json("assets/data/stops.json", function(data) {
 	    .enter().append("svg:text")
 		.text(function(d) { return d.properties.name; }) 
 		.attr("dy", 6)
-		.attr("id", "label")
+		.attr("class", "label")
 		.attr("transform", function(d) { return "translate(" + projection(d.geometry.coordinates) + ")"; })
 		.attr("x", function(d) { return 6; })
 		.attr("y", function(d) { return -6; })

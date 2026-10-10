@@ -39,7 +39,7 @@
     -o-user-select: none;
     user-select: none;
 }
-#label {		  
+.label {		  
     stroke: #444;
 	stroke-width: 1px;
 	stroke-opacity: 0.9;
