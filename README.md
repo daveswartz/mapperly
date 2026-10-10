@@ -2,15 +2,14 @@
 
 Mapperly is a simple + interactive map of the New York City subway. 
 
-Built using d3.js and served with the Play framework. The project is hosted on Heroku.
+Built using d3.js as a static page.
 
 ![Mapperly](https://raw.github.com/daveswartz/mapperly/master/mapperly.png)
 
 ## Getting Started
 
-* Install Play 2.1.3 following the instructions in the [Play framework documentation](http://www.playframework.com/documentation/2.1.3/Installing);
-* In the project root run: `play run`;
-* Navigate to [http://localhost:9000](http://localhost:9000) in your web browser.
+* In the project root run: `python3 -m http.server`;
+* Navigate to [http://localhost:8000](http://localhost:8000) in your web browser.
 
 ## Data
 

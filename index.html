@@ -1,27 +1,25 @@
-@(title: Html, nav: String = "")(content: Html)
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>@title</title>
+    <title>Mapperly | A Simple + Interactive Map of the New York City Subway</title>
     <meta name="description=" content="A Simple + Interactive Map of the New York City Subway">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="@routes.Assets.at("stylesheets/bootstrap.css")" rel="stylesheet">
+    <link href="assets/stylesheets/bootstrap.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 60px;
       }
     </style>
     <link href="assets/stylesheets/bootstrap-responsive.css" rel="stylesheet">
-    <link href="@routes.Assets.at("stylesheets/mapperly.css")" rel="stylesheet"/>
+    <link href="assets/stylesheets/mapperly.css" rel="stylesheet"/>
 
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.ico")">
+    <link rel="shortcut icon" type="image/png" href="assets/images/favicon.ico">
 
     <script type="text/javascript">
       var _gaq = _gaq || [];
@@ -39,22 +37,24 @@
       <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
           <div class="container">
-            <a class="brand" href="@routes.Application.index()">Mapperly</a>
+            <a class="brand" href="./">Mapperly</a>
 			<p class="navbar-text">A simple + interactive map of the New York City subway</p>
           </div>
         </div>
       </div>
 
-      <script src="@routes.Assets.at("javascripts/jquery-1.7.2.js")"></script>
+      <script src="assets/javascripts/jquery-1.7.2.js"></script>
 	  
       <div class="container">
-        @content
+        <div class="well">
+          <div id="vis"></div>
+        </div>
       </div>
 
-      <script src="@routes.Assets.at("javascripts/bootstrap.js")"></script>
-      <script src="@routes.Assets.at("javascripts/d3.js")"></script>
-      <script src="@routes.Assets.at("javascripts/underscore.js")"></script>
-      <script src="@routes.Assets.at("javascripts/mapperly.js")"></script>
+      <script src="assets/javascripts/bootstrap.js"></script>
+      <script src="assets/javascripts/d3.js"></script>
+      <script src="assets/javascripts/underscore.js"></script>
+      <script src="assets/javascripts/mapperly.js"></script>
         
   </body>
 </html>
