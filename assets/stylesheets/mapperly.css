@@ -24,21 +24,6 @@
 	stroke-opacity: 0.95;
 	stroke: #999;
 }
-#backer {		  
-    stroke: #fff;
-    stroke-width: 3px;
-	stroke-opacity: 0.9;	
-	fill: #fff;
-	fill-opacity: 0.9;
-    font: 12px sans-serif;
-    pointer-events: none;
-	text-anchor: middle;
-    	-webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -o-user-select: none;
-    user-select: none;
-}
 .label {		  
     stroke: #444;
 	stroke-width: 1px;
