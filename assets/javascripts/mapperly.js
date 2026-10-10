@@ -66,9 +66,6 @@ d3.json("assets/data/paths.json", function(data) {
             .ease("linear")
             .attr("stroke-dashoffset", 10000)
 		.attr("d", path);
-
-    path
-      
 });
 
 var transfers = map.append("svg:g").attr("id", "transfer");
