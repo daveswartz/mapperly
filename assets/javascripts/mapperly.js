@@ -55,7 +55,7 @@ var lineToColors = d3.map({
 });
 var lines = map.append("svg:g").attr("id", "line");
 d3.json("assets/data/paths.json", function(data) {
-	lines.selectAll("line")
+	lines.selectAll("path")
 		.data(data.features)
 		.enter().append("svg:path")
 		.attr("stroke", function(d, i) { return d3.rgb(lineToColors.get(d.properties.lines[0])); })
@@ -70,7 +70,7 @@ d3.json("assets/data/paths.json", function(data) {
 
 var transfers = map.append("svg:g").attr("id", "transfer");
 d3.json("assets/data/transfers.json", function(data) {
-	transfers.selectAll("transfer")
+	transfers.selectAll("path")
 		.data(data.features)
 		.enter().append("svg:path")
 		.attr("d", path);
@@ -78,11 +78,11 @@ d3.json("assets/data/transfers.json", function(data) {
 
 var stops = map.append("svg:g").attr("id", "stop");
 d3.json("assets/data/stops.json", function(data) {
-	stops.selectAll("stop")
+	stops.selectAll("path")
 		.data(data.features)
 		.enter().append("svg:path")
 		.attr("d", path);
-	stops.selectAll("stop")
+	stops.selectAll("text")
 		.data(data.features)
 	    .enter().append("svg:text")
 		.text(function(d) { return d.properties.name; }) 
